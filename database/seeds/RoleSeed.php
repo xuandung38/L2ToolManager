@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeed extends Seeder
@@ -13,6 +14,7 @@ class RoleSeed extends Seeder
     public function run()
     {
         $role = Role::create(['name' => 'administrator']);
-        $role->givePermissionTo('users_manage');
+        $permissions = Permission::all();
+        $role->givePermissionTo($permissions);
     }
 }
