@@ -25,7 +25,7 @@ class UpdateAccountAPI extends ApiBaseRequest
     public function rules()
     {
         return [
-            'name' =>  'required|exists:account_lists,name',
+            'name' =>  'required',
             'server' =>  'required|numeric',
             'planet' =>  'required|string',
             'power' =>  'required|numeric',
