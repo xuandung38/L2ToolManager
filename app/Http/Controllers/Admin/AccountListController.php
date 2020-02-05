@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AccountList;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AccountListController extends Controller
@@ -20,7 +21,7 @@ class AccountListController extends Controller
         if (! Gate::allows('accounts_manage')) {
             return abort(401);
         }
-        
+
         $accounts = AccountList::with(['key','user'])->get();
 
         if (Auth::user()->hasRole('staff')){
