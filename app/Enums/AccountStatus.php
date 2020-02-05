@@ -15,5 +15,6 @@ final class AccountStatus extends Enum
     const READY =  0; //Sẵn sàng
     const PROCESSING  =  1; //Đang up
     const HANG_ON = 2; //Treo tháp
-    const COMPLETED = 3; //Hoàn thành
+    const UPGEM = 3; //Up ngọc
+    const COMPLETED = 4; //Hoàn thành
 }

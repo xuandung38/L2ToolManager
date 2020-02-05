@@ -37,7 +37,7 @@ class KeyToolController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('keys_manage')) {
+        if (! Gate::allows('keys_create')) {
             return abort(401);
         }
 
@@ -54,7 +54,7 @@ class KeyToolController extends Controller
      */
     public function store(StoreKeyToolRequest $request)
     {
-        if (! Gate::allows('keys_manage')) {
+        if (! Gate::allows('keys_create')) {
             return abort(401);
         }
 
@@ -66,7 +66,7 @@ class KeyToolController extends Controller
             'is_active' =>$request->input('is_active'),
         ]);
 
-        return redirect()->route('admin.key_tool.index');
+        return redirect()->route('admin.keys.index');
     }
 
     /**
@@ -77,7 +77,11 @@ class KeyToolController extends Controller
      */
     public function show($id)
     {
-        //
+        if (! Gate::allows('keys_show')) {
+            return abort(401);
+        }
+        $key = ToolKeyList::with(['user','accounts'])->find($id);
+        return  view('admin.keys.show', compact('key'));
     }
 
     /**
@@ -88,7 +92,7 @@ class KeyToolController extends Controller
      */
     public function edit($id)
     {
-        if (! Gate::allows('keys_manage')) {
+        if (! Gate::allows('keys_edit')) {
             return abort(401);
         }
         $users = User::all();
@@ -106,6 +110,9 @@ class KeyToolController extends Controller
      */
     public function update(UpdateKeyToolRequest $request, $id)
     {
+        if (! Gate::allows('keys_edit')) {
+            return abort(401);
+        }
         $key = ToolKeyList::find($id);
 
         $key->update([
@@ -116,7 +123,7 @@ class KeyToolController extends Controller
             'is_active' =>$request->input('is_active'),
         ]);
 
-        return redirect()->route('admin.key_tool.index');
+        return redirect()->route('admin.keys.index');
     }
 
     /**
@@ -127,7 +134,12 @@ class KeyToolController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (! Gate::allows('keys_delete')) {
+            return abort(401);
+        }
+        $key = ToolKeyList::find($id);
+        $key->delete();
+        return redirect()->route('admin.keys.index');
     }
 
     /**

@@ -51,18 +51,28 @@
                     <i class="nav-icon fas fa-fw fa-key">
 
                     </i>
-                    Change password
+                    {{ trans('global.change_password') }}
                 </a>
             </li>
             @can('keys_manage')
-            <li class="nav-item">
-                <a href="{{ route('admin.keys.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-fw fa-key">
+                <li class="nav-item">
+                    <a href="{{ route('admin.keys.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-fw fa-key">
 
-                    </i>
-                    {{ trans('cruds.key_tool.title') }}
-                </a>
-            </li>
+                        </i>
+                        {{ trans('cruds.key_tool.title') }}
+                    </a>
+                </li>
+            @endcan
+            @can('accounts_manage')
+                <li class="nav-item">
+                    <a href="{{ route('admin.accounts.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-fw fa-key">
+
+                        </i>
+                        {{ trans('cruds.account.title') }}
+                    </a>
+                </li>
             @endcan
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccountList;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class AccountListController extends Controller
 {
@@ -14,7 +17,11 @@ class AccountListController extends Controller
      */
     public function index()
     {
-        //
+        if (! Gate::allows('accounts_manage')) {
+            return abort(401);
+        }
+        $accounts = AccountList::with(['key','user'])->get();
+        return view('admin.accounts.index', compact('accounts'));
     }
 
     /**
@@ -67,19 +74,29 @@ class AccountListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function destroy($id)
     {
-        //
+        if (! Gate::allows('accounts_delete')) {
+            return abort(401);
+        }
+        AccountList::find($id)->delete();
+        return redirect()->route('admin.accounts.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete all selected AccountList at once.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response|void
      */
-    public function destroy($id)
+    public function massDestroy(Request $request)
     {
-        //
+        if (! Gate::allows('accounts_delete')) {
+            return abort(401);
+        }
+        AccountList::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
     }
 }

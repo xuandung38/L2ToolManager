@@ -17,7 +17,7 @@ class CreateAccountListsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->integer('server');
-            $table->integer('planet');
+            $table->string('planet');
             $table->integer('power')->default(0);
             $table->integer('gem')->default(0);
             $table->string('missions')->nullable();

@@ -104,6 +104,8 @@ return [
             'name_helper' => '',
             'server' => 'Server',
             'server_helper' => '',
+            'planet'        => 'Planet',
+            'planet_helper' => '',
             'power' => 'Power',
             'power_helper' => '',
             'gem' => 'Gem',
@@ -124,6 +126,14 @@ return [
             'updated_at_helper' => '',
             'deleted_at' => 'Deleted at',
             'deleted_at_helper' => '',
+            'status_name' => [
+                '0' => 'READY',
+                '1' => 'PROCESSING',
+                '2' => 'HANG_ON',
+                '3' => 'UPGEM',
+                '4' => 'COMPLETED',
+            ],
         ],
+
     ],
 ];

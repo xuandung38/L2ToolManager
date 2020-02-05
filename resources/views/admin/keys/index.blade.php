@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    @can('keys_manage')
+    @can('keys_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route("admin.keys.create") }}">
@@ -59,22 +59,24 @@
                             </td>
 
                             <td>
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.keys.show', $item->id) }}">
-                                    {{ trans('global.view') }}
-                                </a>
-
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.keys.edit', $item->id) }}">
-                                    {{ trans('global.edit') }}
-                                </a>
-
-                                <form action="{{ route('admin.keys.destroy', $item->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                </form>
-
+                                @can('keys_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.keys.show', $item->id) }}">
+                                        {{ trans('global.view') }}
+                                    </a>
+                                @endcan
+                                @can('keys_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.keys.edit', $item->id) }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                @endcan
+                                @can('keys_delete')
+                                    <form action="{{ route('admin.keys.destroy', $item->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    </form>
+                                @endcan
                             </td>
-
                         </tr>
                     @endforeach
                     </tbody>
@@ -90,7 +92,7 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-                    @can('keys_manage')
+            @can('keys_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,

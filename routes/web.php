@@ -11,6 +11,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('permissions', 'Admin\PermissionsController');
     Route::delete('permissions_mass_destroy', 'Admin\PermissionsController@massDestroy')->name('permissions.mass_destroy');
+
     Route::resource('roles', 'Admin\RolesController');
     Route::delete('roles_mass_destroy', 'Admin\RolesController@massDestroy')->name('roles.mass_destroy');
 
@@ -19,4 +20,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     Route::resource('keys', 'Admin\KeyToolController');
     Route::delete('keys_mass_destroy', 'Admin\KeyToolController@massDestroy')->name('keys.mass_destroy');
+
+    Route::resource('accounts', 'Admin\AccountListController');
+    Route::delete('accounts_mass_destroy', 'Admin\AccountListController@massDestroy')->name('accounts.mass_destroy');
 });

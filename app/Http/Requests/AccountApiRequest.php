@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Api\ApiBaseRequest;
 
-class UpdateKeyToolRequest extends FormRequest
+class AccountApiRequest extends ApiBaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,7 @@ class UpdateKeyToolRequest extends FormRequest
     public function rules()
     {
         return [
-            'key' => 'required|string|exists:tool_key_lists,key',
-            'machine_name' => 'required',
-            'user_id' => 'required',
-            'is_active' => 'required',
-            'expired_at' => 'required',
+            //
         ];
     }
 }
