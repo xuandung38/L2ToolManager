@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\AccountStatus;
 use App\Http\Controllers\Controller;
 use App\Models\AccountList;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class AccountListController extends Controller
         $accounts = AccountList::with(['key','user'])->get();
 
         if (Auth::user()->hasRole('staff')){
-            $accounts = AccountList::with(['key','user'])->where('user_id', Auth::id())->get();
+            $accounts = AccountList::with(['key','user'])->where('user_id', Auth::id())->where('status', '!=',AccountStatus::COMPLETED)->get();
         }
 
         return view('admin.accounts.index', compact('accounts'));

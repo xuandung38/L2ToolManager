@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enums\AccountStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccountAPI;
 use App\Http\Requests\UpdateAccountAPI;
@@ -67,7 +68,7 @@ class AccountListController extends Controller
     public function show(Request $request)
     {
         $key = ToolKeyList::with(['user'])->where('key' , $request->header('key'))->first();
-        $accounts = AccountList::where('key_id' , $key->id)->where('status', '!=' , '4' )->get();
+        $accounts = AccountList::where('key_id' , $key->id)->where('status', '!=' , AccountStatus::COMPLETED )->get();
 
         return  response()->json(['status' => true, 'data' => $accounts]);
     }
