@@ -20,7 +20,13 @@ class AccountListController extends Controller
         if (! Gate::allows('accounts_manage')) {
             return abort(401);
         }
+        
         $accounts = AccountList::with(['key','user'])->get();
+
+        if (Auth::user()->hasRole('staff')){
+            $accounts = AccountList::with(['key','user'])->where('user_id', Auth::id())->get();
+        }
+
         return view('admin.accounts.index', compact('accounts'));
     }
 
