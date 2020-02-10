@@ -23,7 +23,7 @@ class AccountListController extends Controller
             return abort(401);
         }
 
-        $accounts = AccountList::with(['key','user'])->get();
+        $accounts = AccountList::with(['key','user'])->orderByDesc('id')->get();
 
         if (Auth::user()->hasRole('staff')){
             $accounts = AccountList::with(['key','user'])->where('user_id', Auth::id())->where('status', '!=',AccountStatus::COMPLETED)->get();
