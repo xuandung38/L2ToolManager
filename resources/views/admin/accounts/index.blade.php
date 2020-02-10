@@ -11,6 +11,9 @@
                     <table class="table table-bordered table-striped table-hover datatable datatable-User">
                         <thead>
                         <tr>
+                            <th width="10">
+
+                            </th>
                             <th class="center">{{ trans('cruds.account.fields.id') }}</th>
                             <th>{{ trans('cruds.account.fields.name') }}</th>
                             <th>{{ trans('cruds.account.fields.server') }}</th>
@@ -26,6 +29,10 @@
                         </thead>
                         <tbody>
                         @foreach($accounts as $account)
+                        <tr data-entry-id="{{ $user->id }}">
+                          <td>
+
+                            </td>
                             <td>{{ $account->id }}</td>
                             <td>{{ $account->name }}</td>
                             <td>{{ $account->server }}</td>
