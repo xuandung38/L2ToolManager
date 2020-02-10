@@ -29,7 +29,8 @@
                         </thead>
                         <tbody>
                         @foreach($accounts as $account)
-                        <tr data-entry-id="{{ $user->id }}">
+
+                        <tr data-entry-id="{{ $account->id }}">
                           <td>
 
                             </td>
