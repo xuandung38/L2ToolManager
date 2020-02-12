@@ -40,16 +40,18 @@
                     </thead>
                     <tbody>
                         @foreach($key->accounts as $account)
-                            <td>{{ $account->id }}</td>
-                            <td>{{ $account->name }}</td>
-                            <td>{{ $account->server }}</td>
-                            <td>{{ $account->planet }}</td>
-                            <td>{{ $account->power }}</td>
-                            <td>{{ $account->gem }}</td>
-                            <td>{{ $account->missions }}</td>
-                            <td>{{ $account->map }}</td>
-                            <td>{{ $account->login_at }}</td>
-                            <td>{{ $account->status }}</td>
+                         <tr>
+                             <td>{{ $account->id }}</td>
+                             <td>{{ $account->name }}</td>
+                             <td>{{ $account->server }}</td>
+                             <td>{{ $account->planet }}</td>
+                             <td>{{ $account->power }}</td>
+                             <td>{{ $account->gem }}</td>
+                             <td>{{ $account->missions }}</td>
+                             <td>{{ $account->map }}</td>
+                             <td>{{ $account->login_at }}</td>
+                             <td>{{ $account->status }}</td>
+                         </tr>
                         @endforeach
                     </tbody>
                 </table>
