@@ -43,7 +43,7 @@
                     </thead>
                     <tbody>
                         @foreach($key->accounts as $account)
-                         <tr>
+                            <tr data-entry-id="{{ $account->id }}">
                              <td></td>
                              <td>{{ $account->id }}</td>
                              <td>{{ $account->name }}</td>
@@ -69,7 +69,7 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-                    @can('accounts_delete')
+           @can('accounts_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,
