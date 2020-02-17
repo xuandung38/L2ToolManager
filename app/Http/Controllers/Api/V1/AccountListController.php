@@ -85,23 +85,23 @@ class AccountListController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateAccountAPI $request,$id)
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param UpdateAccountAPI $request
+	 * @param $name
+	 * @return \Illuminate\Http\Response
+	 */
+    public function update(UpdateAccountAPI $request,$name)
     {
         $key = ToolKeyList::with(['user'])->where('key' , $request->header('key'))->first();
-        $account = AccountList::where('id', $id)->where('name', $request->input('name'))->where('key_id', $key->id)->first();
+        $account = AccountList::where('name', $name)->where('key_id', $key->id)->first();
         if (!isset($account)){
             return  response()->json(['status' => 'false', 'error' => 'Không tìm thấy tài khoản']);
         }
 
         $account->update([
-            'name' =>  $request->input('name'),
+            'name' =>  $name,
             'server' =>   $request->input('server'),
             'planet' =>    $request->input('planet'),
             'power' =>    $request->input('power'),
